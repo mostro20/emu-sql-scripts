@@ -14,3 +14,8 @@ Import all tables, note that when importing the larger tables all fields that ar
 7)	Concatenate the Narrative linked to objects via: concat_objects_narratives.sql
 8)	Run all Export scripts ()
 
+
+= TODO: New method =
+
+Setup instructions to use the new PHP Script that processes the XML exports and pushes them into the holding database.
+
