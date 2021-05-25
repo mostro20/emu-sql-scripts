@@ -1,0 +1,3 @@
+SET SESSION group_concat_max_len = 100000;
+USE `20210412_CMS_DAMS`;
+CALL ROWPERROW3;
