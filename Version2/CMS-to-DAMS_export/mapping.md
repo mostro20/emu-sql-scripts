@@ -42,12 +42,19 @@ This contains basic information for mapping the fields
 |title|ObjObjectTitleCof.ObjObjectTitleGrp|
 |`year`|ONLY WITH CREATION AS TYPE ObjDateFol.ObjDateGrp|
 |rights|ObjRightsRefGrp.ObjRightsRef|
-|creators|ONLY WITH ARTIST TYPE ObjPerAssociationFol.ObjPerAssociationRef (NAME + DOB + DOD)|
+|creators|CYCLE THROUGH RELATED PERSONS ONLY WITH ARTIST TYPE ObjPerAssociationFol.ObjPerAssociationRef (Person.NAME + Person.DOB + Person.DOD) + ObjPerAssociationRef.RoleCbx.ObjPerAssociationRef[RoleVoc]|
 |place_created|ONLY WITH PLACE CREATED ObjGeograficFol.ObjGeograficGrp|
 |dimensions|ObjDimAllGrp.PreviewDpl|
 |credit|IF DOMAIN = Non Collection THEN (LOAN CREDIT) /n ObjCreditlineXpd.ObjCreditLineTxt;IF DOMAIN = Collection (from related Acquisition: AcqCreditlineXpd.AcqCreditlineTxt)|
 |media_statement|ObjMaterialTechniqueXpd.ObjMaterialTechniqueTxt|
 |special_digital_meta|not used|
-|short_caption|
-|long_caption|+ SUPPORT ObjEditionNrXpd.ObjEditionNrTxt
-|last_updated|+ LAST UPDATED
+|short_caption|ObjObjectTitleCof.ObjObjectTitleGrp, ' ', (ONLY WITH CREATION AS TYPE ObjDateFol.ObjDateGrp), ' ', (CYLCE THROUGH ALL RELATED PERSONS WITH "ARTIST" TYPE ObjPerAssociationFol.ObjPerAssociationRef (NAME + DOB + DOD)|
+|long_caption| CYCLE THROUGH RELATED PERSONS ONLY WITH ARTIST TYPE ObjPerAssociationFol.ObjPerAssociationRef (Person.NAME + Person.DOB + Person.DOD) + ObjPerAssociationRef.RoleCbx.ObjPerAssociationRef[RoleVoc] + \n with each person.
+ObjObjectTitleCof.ObjObjectTitleGrp + ONLY WITH CREATION AS TYPE ObjDateFol.ObjDateGrp + \n
+ObjMaterialTechniqueXpd.ObjMaterialTechniqueTxt + ObjEditionNrXpd.ObjEditionNrTxt + \n
+ObjDimAllGrp.PreviewDpl + \n
+'Acc. No: ' + ObjObjectNumberCof.ObjObjectNumberGrp + \n
+'Temp. No:' + ObjTemporaryNumberCof.ObjTemporaryNumberGrp + \n
+IF DOMAIN = Non Collection THEN (LOAN CREDIT) /n ObjCreditlineXpd.ObjCreditLineTxt;IF DOMAIN = Collection (from related Acquisition: AcqCreditlineXpd.AcqCreditlineTxt)|
+Rights: ObjRightsRefGrp.ObjRightsRef|
+|last_updated|+ LAST UPDATED|
