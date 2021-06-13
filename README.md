@@ -31,12 +31,12 @@ Assumes that EMu (legacy CMS) has run an export report (see [Mapping](https://gi
 
 In the above subsitute the name of the current database and connection credentials as appropriate.
 
-### 2. DAMS folders: CMS-to-DAMS_export and DAMS-convert-XML
+### 2. DAMS folder: CMS-to-DAMS_export
 
 Assumes that EMu (legacy CMS) has run an export report (see [Mapping](https://github.com/mostro20/emu-sql-scripts/blob/master/Version2/CMS-to-DAMS_export/mapping.md)). After this has been run: 
 
 * Create holding database with `CMS-to-DAMS_export/create-tables-caption.sql`
-* Import data from XML into new database with `DAMS-convert-XML/importXML.php`
+* Import data from XML into new database with `CMS-to-DAMS_export/importXML.php`
 * Create procedure to create formatted captions with `CMS-to-DAMS_export/create-tables-caption.sql`
 * Execute procedure `CMS-to-DAMS_export/execute_procedure.sql`
 
