@@ -1,11 +1,12 @@
-# emu-sql-scripts
+# EMu Export to Drupal 9 and Fotoware DAMS
+
 Set of scripts for taking emu exports and formatting them for the following:
 
-* ingest into Drupal 8 and Tome Generated Static Website
-* place into holding database for migration into the dynamic Drupal 8 website
+* ingest into Drupal 9 and Tome Generated Static Website
+* place into holding database for migration into the dynamic Drupal 9 website
 * holding database for generating captions for the Fotoware DAMS
 
-There are two versions of the process, the vast majority will be focused on Version 2. Version 1 will be documented for legacy and if the old beta websites need to be regenerated.
+There are two versions of the process, the vast majority will be focused on Version 2. Version 1 will be documented for legacy and if the old beta websites need to be regenerated. Version 3 is intended to replace the Feeds ingest part of V2, and is in development.
 
 ## Version 3 (Dev)
 
