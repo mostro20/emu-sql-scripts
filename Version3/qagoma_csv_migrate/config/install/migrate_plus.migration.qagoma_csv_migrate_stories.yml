@@ -1,0 +1,136 @@
+id: qagoma_csv_migrate_node
+label: QAGOMA CSV Migrate Stories node
+migration_tags:
+  - QAGOMA Migrate CSV
+source:
+  plugin: csv
+  path: modules/custom/qagoma_csv_migrate/sources/qagoma_csv_migrate_stories.csv
+  ids: [ID]
+process:
+  title: Narrative title
+  body: Narrative content
+  field_artist_stories:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Artist Stories
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_lookup
+      entity_type: node
+      bundle: creator
+      value_key: field_inter
+  field_author:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Author
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: authors
+      value_key: name
+      bundle_key: vid
+  field_contributors:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Contributors
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_lookup
+      entity_type: taxonomy_term
+      bundle: authors
+      value_key: name
+      bundle_key: vid
+  field_date: Publication date
+  field_inter: IRN
+  field_linked_event: Linked event
+  field_narrative_type:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Narrative function
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: field_narrative_type
+      value_key: name
+      bundle_key: vid
+  field_parent_narrative:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Parent narrative
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_lookup
+      entity_type: node
+      bundle: stories
+      value_key: field_inter  
+  field_publication: field_publication
+  field_related_objects:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Related Objects
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_lookup
+      entity_type: node
+      bundle: object
+      value_key: field_inter  
+  field_story_type:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Story type
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: story_type
+      bundle: place
+      value_key: name
+      bundle_key: vid
+  type:  
+    plugin: default_value
+    default_value: stories
+destination:
+  plugin: entity:node

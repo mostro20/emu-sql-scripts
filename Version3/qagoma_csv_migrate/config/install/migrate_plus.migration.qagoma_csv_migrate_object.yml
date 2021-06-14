@@ -1,0 +1,126 @@
+id: qagoma_csv_migrate_node
+label: QAGOMA CSV Migrate object node
+migration_tags:
+  - QAGOMA Migrate CSV
+source:
+  plugin: csv
+  path: modules/custom/qagoma_csv_migrate/sources/qagoma_csv_migrate_objects.csv
+  ids: [ID]
+process:
+  title: Object title
+  field_accession_no_: Accession Number
+  field_creation_date_range: Creation date range
+  field_creator_list: Creator list
+  field_credit_line: Credit line
+  field_date_created: Date created
+  field_department:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Department
+    -
+      plugin: entity_lookup
+      entity_type: taxonomy_term
+      bundle: departments
+      value_key: name
+      bundle_key: vid
+  field_dimensions_b: Dimensions B
+  field_dimensions: Dimensions
+  field_edition: Edition
+  field_image_reference: ImageURL
+  field_inter: IRN
+  field_medium_statement: Medium Statement
+  field_medium:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: medium
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: medium
+      value_key: name
+      bundle_key: vid
+  field_physical_location: Physical location
+  field_place_created: 
+      -
+      plugin: skip_on_empty
+      method: process
+      source: Place created
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: place
+      value_key: name
+      bundle_key: vid
+  field_publisher: Publisher
+  field_secondary_type_category:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Secondary Media
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: medium
+      value_key: name
+      bundle_key: vid
+  field_source: Source
+  field_subjects:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Subjects
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: tags
+      value_key: name
+      bundle_key: vid
+  field_support: Support
+  field_type:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: Type
+    -
+      plugin: explode
+      delimiter: ';'
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: taxonomy_term
+      bundle: medium
+      value_key: name
+      bundle_key: vid
+  type:  
+    plugin: default_value
+    default_value: object
+destination:
+  plugin: entity:node

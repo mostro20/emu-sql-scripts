@@ -10,7 +10,9 @@ There are two versions of the process, the vast majority will be focused on Vers
 
 ## Version 3 (Dev)
 
-This is a development Migrate file for Drupal. Due to Drush conflicts between Migrate Tools, and dependencies for Drush 10.5 and Drupal 9.1.10, this module has not been able to be run, so is a theoretical working file.
+This is a development Custom Migrate module for Drupal. Due to Drush conflicts between Migrate Tools, and dependencies for Drush 10.5 and Drupal 9.1.10, this module has not been able to be run, so is a theoretical working file.
+
+There is a readme in the `Version3` folder that contains documentation about the custom module.
 
 ## Version 2 (Current)
 

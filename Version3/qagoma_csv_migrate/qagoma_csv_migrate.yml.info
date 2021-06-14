@@ -1,0 +1,9 @@
+type: module
+name: QAGOMA CSV Migration
+description: 'QAGOMA CSV Migration example. Based on a tutorial from <a href="https://atendesigngroup.com/articles/drupal-8-content-migrations-csv-spreadsheet"> Aten Design Group.</a>'
+package: Migration
+core_version_requirement: ^8.8.7 || ^9
+dependencies:
+  - drupal:migrate
+  - migrate_source_csv
+  - migrate_plus
