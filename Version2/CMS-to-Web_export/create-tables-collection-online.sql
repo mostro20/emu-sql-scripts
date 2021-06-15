@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS emultimedia (
     AdmPublishWebNoPassword VARCHAR(255) NULL,
     MulCreator TEXT,
     DetRights TEXT,
-    SummaryData TEXT
+    SummaryData TEXT,
+    MulMimeType VARCHAR(255) NULL,
+    MulMimeFormat VARCHAR(255) NULL
 )  ENGINE=INNODB;
     
 CREATE TABLE IF NOT EXISTS enarratives (
