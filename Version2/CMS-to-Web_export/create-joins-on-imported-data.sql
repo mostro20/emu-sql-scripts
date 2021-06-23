@@ -55,6 +55,22 @@ SET en.PartiesRef = (
 	GROUP BY cs.NarrativeIRN
 	)
 
+/*Generator a creator list on the object*/
+USE `20210615_Web`;
+UPDATE 
+	`20210615_Web`.ecatalogue e
+INNER JOIN
+	`20210615_Web`.Objects_CreatorIRNS ON Objects_CreatorIRNS.ObjectIRN = e.irn
+SET e.CreRole = (
+	SELECT
+		GROUP_CONCAT(CONCAT(p.NamOrganisation, p.NamLast, ', ', p.NamFirst, ' - ', oc.CreRole) SEPARATOR '; ') AS 'CreRole'
+	FROM `20210615_Web`.eparties p 
+	INNER JOIN `20210615_Web`.Objects_CreatorIRNS oc ON p.PartiesIRN = oc.CreatorIRN
+	WHERE oc.ObjectIRN = e.irn
+	GROUP BY oc.ObjectIRN
+)
+WHERE e.irn = Objects_CreatorIRNS.ObjectIRN
+
 
 /*ONCE FULLY EXECUTED NOW NEED TO QUERY DATA FOR FEEDS INGEST*/
 
@@ -79,7 +95,8 @@ PhySecondaryMediaCategory AS "Secondary Media",
 ImageURL AS "URL",
 ObjectType AS "Subjects",
 PhyMediumText AS "MediumText",
-DetRights AS "Rights"
+DetRights AS "Rights",
+CreRole AS "Creator List"
 FROM ecatalogue
 WHERE AdmPublishWebPassword LIKE 'Yes'
 
