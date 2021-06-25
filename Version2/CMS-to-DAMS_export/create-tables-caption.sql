@@ -54,3 +54,21 @@
     DetRights TEXT,
     SummaryData TEXT
   )  ENGINE=INNODB;
+
+  CREATE TABLE `caption_data` (
+  `cms_irn` int DEFAULT NULL,
+  `object_type` text,
+  `accession_no` text,
+  `title` text,
+  `year` text,
+  `rights` text,
+  `creators` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `place_created` text,
+  `dimensions` text,
+  `credit` text,
+  `media_statement` text,
+  `special_digital_meta` text,
+  `short_caption` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `long_caption` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `last_updated` text
+) ENGINE=InnoDB;
