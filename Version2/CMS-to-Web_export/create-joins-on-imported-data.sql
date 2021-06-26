@@ -19,13 +19,30 @@ CREATE INDEX Narratives_AttachmentsIRNS_NarrativeIRN_IDX USING BTREE ON `2021061
 CREATE INDEX Objects_CreatorIRNS_ObjectIRN_IDX USING BTREE ON `20210615_Web`.Objects_CreatorIRNS (ObjectIRN,CreatorIRN);
 CREATE INDEX Objects_MultimediaIRNS_ObjectIRN_IDX USING BTREE ON `20210615_Web`.Objects_MultimediaIRNS (ObjectIRN,MultimediaIRN);
 
-/*Now add image URL via the Objects_Multimedia Mapping table*/
+/*DEPENDING ON EMU EXPORT YOU WILL NEED TO DRAW IMAGES FROM EITHER THE MULTIMEDIA CSV OR OBJECT_MULTMEDIA CSV.*/
+/*IF OBJECT_MULTMEDIA CSV - Now add image URL via the Objects_Multimedia Mapping table*/
 USE `20210615_Web`;
 UPDATE ecatalogue ec
 JOIN Objects_MultimediaIRNS omi ON omi.ObjectIRN = ec.irn
 JOIN emultimedia mm ON mm.irn = omi.MultimediaIRN
 SET ec.ImageURL = Concat('/sites/default/files/', mm.MulIdentifier),
     ec.DetRights = mm.DetRights
+
+/*IF MULTIMEDIA CSV - Now add image URL via the intermedia ecat_map Mapping table*/
+UPDATE 
+ecatalogue e
+INNER JOIN ecat_map em ON e.irn = em.objectirn 
+INNER JOIN MulMultimedia mm ON em.ecatalogueid = mm.ecatalogue_key 
+SET
+	e.ImageURL = CONCAT('/sites/default/files/',mm.Multimedia)
+/*and update the rights*/
+USE `20210615_Web`;
+UPDATE ecatalogue ec
+JOIN Objects_MultimediaIRNS omi ON omi.ObjectIRN = ec.irn
+JOIN emultimedia mm ON mm.irn = omi.MultimediaIRN
+SET ec.DetRights = mm.DetRights
+
+/*END PICK A PATH JOURNEY AND RETURN TO GLOBAL BUIL PATH*/
 
 /* Add Objects to Parties */
 SET SESSION group_concat_max_len = 1000000;

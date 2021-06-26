@@ -49,3 +49,11 @@ CREATE TABLE `Objects_RightsIRNs` (
   `rightsirn` int DEFAULT NULL,
   KEY `Objects_RightsIRNs_objectirn_IDX` (`objectirn`,`rightsirn`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- `20210615_Web`.ecat_map definition
+
+CREATE TABLE `ecat_map` (
+  `ecatalogueid` int DEFAULT NULL,
+  `objectirn` int DEFAULT NULL,
+  KEY `ecat_map_ecatalogueid_IDX` (`ecatalogueid`,`objectirn`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
