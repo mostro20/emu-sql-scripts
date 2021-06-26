@@ -35,6 +35,8 @@ INNER JOIN ecat_map em ON e.irn = em.objectirn
 INNER JOIN MulMultimedia mm ON em.ecatalogueid = mm.ecatalogue_key 
 SET
 	e.ImageURL = CONCAT('/sites/default/files/',mm.Multimedia)
+WHERE mm.ecatalogue_key IS NOT NULL or LENGTH(mm.ecatalogue_key)=0
+
 /*and update the rights*/
 USE `20210615_Web`;
 UPDATE ecatalogue ec
