@@ -116,7 +116,8 @@ ImageURL AS "URL",
 ObjectType AS "Subjects",
 PhyMediumText AS "MediumText",
 DetRights AS "Rights",
-CreRole AS "Creator List"
+CreRole AS "Creator List",
+CreSubjectClassification AS "Subjects"
 FROM ecatalogue
 WHERE AdmPublishWebPassword LIKE 'Yes'
 
