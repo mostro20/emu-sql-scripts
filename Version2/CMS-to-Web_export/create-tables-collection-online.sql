@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS enarratives (
     NarrativeIRN INT NOT NULL,
     NarrativeSummary TEXT,
     NarrativeRecordStatus TEXT,
-    NarNarrative TEXT
+    NarNarrative TEXT,
+    LastUpdated date DEFAULT NULL,
     )  ENGINE=INNODB;   
 
 CREATE TABLE IF NOT EXISTS ecatalogue (
@@ -58,7 +59,8 @@ CREATE TABLE IF NOT EXISTS ecatalogue (
     EdiImpression TEXT,
     TitDepartment VARCHAR(255) NULL,
     PhySecondaryMediaCategory TEXT,
-    CrePeriodStyle TEXT
+    CrePeriodStyle TEXT,
+    LastUpdated date DEFAULT NULL,
     )  ENGINE=INNODB;  
 
 CREATE TABLE IF NOT EXISTS eparties(
@@ -79,5 +81,6 @@ CREATE TABLE IF NOT EXISTS eparties(
     PartiesPublishIntranet VARCHAR(255) NULL,
     PartiesSummaryData TEXT,
     PartiesRecordStatus TEXT,
-    BioCulturalIdentity1 TEXT
+    BioCulturalIdentity1 TEXT,
+    LastUpdated date DEFAULT NULL,
     )  ENGINE=INNODB; 

@@ -72,7 +72,7 @@ BEGIN
                 NULLIF(e.AccCreditLineLocal, ''), CHAR(13),
                 (SELECT group_concat(concat_ws(' ', NULLIF(ri2.RigAcknowledgement, ''))order by ri2.irn separator '\n') FROM erightsinfo ri2 WHERE ri2.ObjectIRN = e.irn)
             ) AS long_caption,
-        DATE(NOW()) AS last_updated
+        AdmDateModified AS last_updated
     FROM ecatalogue e
         LEFT JOIN Objects_attachedCreatorIRNS objirn ON objirn.ObjectIRN = e.irn
         LEFT JOIN eparties cre ON objirn.CreatorIRN = cre.PartiesIRN
