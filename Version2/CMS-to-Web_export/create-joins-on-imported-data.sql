@@ -119,7 +119,7 @@ DetRights AS "Rights",
 CreRole AS "Creator List",
 CreSubjectClassification AS "Subjects"
 FROM ecatalogue
-WHERE AdmPublishWebPassword LIKE 'Yes'
+WHERE AdmPublishWebNoPassword LIKE 'Yes'
 
 /*Export Parties*/
 SELECT

@@ -56,7 +56,8 @@
   )  ENGINE=INNODB;
 
   CREATE TABLE `caption_data` (
-  `cms_irn` int DEFAULT NULL,
+  `cms_id` int DEFAULT NULL,
+  `cms_irn` int,
   `object_type` text,
   `accession_no` text,
   `title` text,
@@ -70,5 +71,6 @@
   `special_digital_meta` text,
   `short_caption` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
   `long_caption` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `last_updated` text
+  `last_updated` text,
+  `active` tinyint
 ) ENGINE=InnoDB;
