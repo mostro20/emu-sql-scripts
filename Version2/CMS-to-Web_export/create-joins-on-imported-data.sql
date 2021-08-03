@@ -30,13 +30,13 @@ SET ec.ImageURL = Concat('/sites/default/files/', mm.MulIdentifier),
 
 /*IF MULTIMEDIA CSV - Now add image URL via the intermedia ecat_map Mapping table*/
 UPDATE 
-ecatalogue e
-INNER JOIN MulMultimedia2 mm ON mm.ObjectIRN = e.irn 
-INNER JOIN emultimedia em ON em.irn = mm.MultimediaIRN
-SET
-	e.ImageURL = CONCAT('/sites/default/files/',mm.Multimedia)
-WHERE mm.ecatalogue_key IS NOT NULL or LENGTH(mm.ecatalogue_key)=0
-AND  em.AdmPublishWebNoPassword LIKE 'Yes'
+ecatalogue ec
+JOIN Objects_MultimediaIRNS omi ON omi.ObjectIRN = ec.irn
+JOIN emultimedia e ON e.irn = omi.MultimediaIRN 
+SET 
+ec.ImageURL = CONCAT('/sites/default/files/',omi.Multimedia)
+WHERE omi.Multimedia IS NOT NULL  or LENGTH(mm.ecatalogue_key)=0
+AND  ec.AdmPublishWebNoPassword LIKE 'Yes'
 
 /*and update the rights*/
 USE `20210615_Web`;
