@@ -61,14 +61,15 @@ BEGIN
         'digital fields' AS special_digital_meta,
         (SELECT group_concat(concat_ws(' ', e.TitMainTitle, ' ', e.CreDateCreated, ' ', pi2.PartiesSummaryData, ' (', pi2.CreRole, ') ', ' b.', pi2.BioBirthDate, ' - ', pi2.BioDeathDate) order by pi2.PartiesIRN separator '\n') FROM epartiesinfo pi2 WHERE pi2.ObjectIRN = e.irn) AS short_caption,
         CONCAT_WS(' ',
-            (SELECT group_concat(concat_ws(' ', pi3.PartiesSummaryData, ' (', pi3.CreRole, ') ', CHAR(13),NULLIF(pi3.BioCulturalIdentity1, ''),pi3.Country, ' ',  ' b.', pi3.BioBirthDate, ' - ', pi3.BioDeathDate) order by pi3.PartiesIRN separator '\n')
+            (SELECT group_concat(concat_ws(' ', pi3.PartiesSummaryData, IF(pi3.CreRole IS NULL or pi3.CreRole = '','',' ('), pi3.CreRole, IF(pi3.CreRole IS NULL or pi3.CreRole = '','',' )'), CHAR(13),NULLIF(pi3.BioCulturalIdentity1, ''),pi3.Country, ' ',  IF(pi3.BioBirthDate IS NULL or pi3.BioBirthDate = '','',' b.'), pi3.BioBirthDate, IF(pi3.BioBirthDate IS NULL AND pi3.BioDeathDate IS NULL,'',' - '), pi3.BioDeathDate) order by pi3.PartiesIRN separator '\n')
             FROM epartiesinfo pi3
             WHERE pi3.ObjectIRN = e.irn),
+                CHAR(13),
                 NULLIF(e.TitMainTitle, ''), ' ', NULLIF(e.CreDateCreated, ''), CHAR(13),
                 NULLIF(e.PhyMediumText, ''), ' ', NULLIF(e.PhySupport, ''), CHAR(13),
                 NULLIF(e.PhyVerbatimMeasurementsA, ''), ' ', NULLIF(e.PhyVerbatimMeasurementsB, ''), CHAR(13),
-                'Acc.', NULLIF(e.TitAccessionNo, ''), CHAR(13),
-                'Temp no.', NULLIF(e.TitPreviousNumber, ''), CHAR(13),
+                IF(e.TitAccessionNo IS NULL or e.TitAccessionNo = '','','Acc.'), NULLIF(e.TitAccessionNo, ''), IF(e.TitAccessionNo IS NULL or e.TitAccessionNo = '','',CHAR(13)),
+                IF(e.TitPreviousNumber IS NULL or e.TitPreviousNumber = '','','Temp no.'), NULLIF(e.TitPreviousNumber, ''), IF(e.TitPreviousNumber IS NULL or e.TitPreviousNumber = '','',CHAR(13)),
                 NULLIF(e.AccCreditLineLocal, ''), CHAR(13),
                 (SELECT group_concat(concat_ws(' ', NULLIF(ri2.RigAcknowledgement, ''))order by ri2.irn separator '\n') FROM erightsinfo ri2 WHERE ri2.ObjectIRN = e.irn)
             ) AS long_caption,
